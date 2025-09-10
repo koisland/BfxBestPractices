@@ -38,16 +38,23 @@ def parse_summary_structured(infile: str) -> dict[str, Any]:
         return json.load(fh)
 
 def main():
+    with open(DATA_DIR.joinpath("summary_statistics")) as fh:
+        text_summary_unstructured = fh.read()
     summary_unstructured = parse_summary_unstructured(
         DATA_DIR.joinpath("summary_statistics")
     )
     summary_structured = parse_summary_structured(
         DATA_DIR.joinpath("summary_statistics.json")
     )
-    pprint.pprint(summary_structured)
+    print("Unstructured data:")
+    print("------------------")
+    print(text_summary_unstructured)
+    print("Structured data:")
+    print("------------------")
     pprint.pprint(summary_unstructured)
     assert summary_structured == summary_unstructured, "Parsed files are not equal."
-    print("You can also access elements more easily. Try getting the N50 from the summary_structured variable.")
+    print("You can also access elements more easily. Try getting the N50 from the summary_structured variable. Press 'q' to quit.")
+    print('Try summary_structured["Statics of contigs"]["N50"]')
     breakpoint()
 
 if __name__ == "__main__":

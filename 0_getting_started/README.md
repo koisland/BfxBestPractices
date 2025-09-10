@@ -22,6 +22,12 @@ Exit your terminal and log back onto pepe. It should now look something like thi
 (base) [koisland@pepe ~]$ 
 ```
 
+Now install the environment for the workshop.
+```bash
+conda env create -f environment.yaml --name workshop
+conda activate workshop
+```
+
 ## GitHub account and SSH key
 First, create a GitHub account.
 ![](images/github.png)
