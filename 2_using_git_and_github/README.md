@@ -82,7 +82,8 @@ git push -u origin main
 ### Pull request
 Finally, we'll open a pull-request (PR) to merge those changes into the main branch.
 
-![]()
+![](docs/pr.png)
+![](docs/pr_changes.png)
 
 Congrats! What you've just done is the core workflow of open-source software development!
 
