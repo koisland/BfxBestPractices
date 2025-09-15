@@ -4,8 +4,11 @@ channels:
 dependencies:
   - python==3.12
   - htslib
+  - git
   - pip
   - pip:
     - joblib
     - polars
     - snakemake
+    - pytest
+    - snakemake-executor-plugin-lsf

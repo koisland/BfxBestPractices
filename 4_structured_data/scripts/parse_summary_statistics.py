@@ -53,8 +53,10 @@ def main():
     print("------------------")
     pprint.pprint(summary_unstructured)
     assert summary_structured == summary_unstructured, "Parsed files are not equal."
-    print("You can also access elements more easily. Try getting the N50 from the summary_structured variable. Press 'q' to quit.")
-    print('Try summary_structured["Statics of contigs"]["N50"]')
+    print("------------------")
+    print("This script parsed the Inspector's summary output. However, the tool could have just generated JSON or YAMl output to begin with.")
+    print("With structured data like JSON, you can access elements more easily. Try getting the N50 from the summary_structured variable. Press 'q' to quit.")
+    print('Try:\n\tsummary_structured["Statics of contigs"]["N50"]')
     breakpoint()
 
 if __name__ == "__main__":

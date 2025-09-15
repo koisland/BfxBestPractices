@@ -1,0 +1,59 @@
+general:
+  input-fasta:        merged/subset_renamed.fa
+  output-dir:         pggb/
+  temp-dir:           pggb/
+  resume:             false
+  compress:           false
+  threads:            65
+  poa_threads:        65
+pggb:
+  version:            v0.7.2
+wfmash:
+  version:            v0.14.0-0-g517e1bc
+  segment-length:     50000
+  block-length:       250000
+  map-pct-id:         85
+  n-mappings:         1
+  no-splits:          false
+  sparse-map:         false
+  mash-kmer:          19
+  mash-kmer-thres:    0.001
+  hg-filter-ani-diff: 10
+  exclude-delim:      #
+  no-merge-segments:  false
+seqwish:
+  version:            v0.7.11-0-g0eb6468
+  min-match-len:      311
+  sparse-factor:      0
+  transclose-batch:   10M
+smoothxg:
+  version:            v0.8.2-0-g6a2193d
+  skip-normalization: false
+  n-haplotypes:       275
+  path-jump-max:      0
+  edge-jump-max:      0
+  poa-length-target:  13117,13219
+  poa-params:         1,4,6,2,26,1
+  poa_padding:        0.03
+  run_abpoa:          false
+  run_global_poa:     false
+  pad-max-depth:      100
+  write-maf:          false
+  consensus-spec:     false
+  consensus-prefix:   Consensus_
+  block-id-min:       .8500
+  block-ratio-min:    0
+odgi:
+  version:            v0.9.2-0-gbe6a0202
+  viz:                true
+  layout:             true
+  stats:              false
+gfaffix:
+  version:            v0.2.1
+  reduce-redundancy:  true
+vg:
+  version:            v1.63.1
+  deconstruct:        false
+reporting:
+  version:            v1.22
+  multiqc:            false

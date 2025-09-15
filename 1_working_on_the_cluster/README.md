@@ -1,14 +1,26 @@
 # Working on the cluster
 
-## Storage
+## Data and Project Storage
+### Data
 All project data is stored in `/project/logsdon_shared/data`
+* Generally for external data
 
 All PromethION data is stored in `/project/logsdon_shared/long_read_archive`
 * Pending update.
+* For data produced in our lab.
 
+### Projects
 Projects are stored in `/project/logsdon_shared/projects`
-* Organized by user.
+* Organized by user or project.
 * Ex. `/project/logsdon_shared/projects/Keith`
+
+Personally, I like to keep things organized by analysis and avoid nesting directories as much as possible.
+* Easier to find things later.
+* Once some analysis is done, I treat it as read-only and symlink the outputs.
+
+I also don't put any raw data in project directories.
+* Avoids change of deleting or accidentally modifying.
+* Always, symlink to these files.
 
 ## Cluster etiquette
 * Keep things clean if in a shared directory.

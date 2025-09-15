@@ -51,7 +51,7 @@ less ~/.ssh/id_rsa.pub
 ![](images/ssh_key.png)
 
 ## Forking this repo.
-Finally, we'll fork this repo. After that
+Finally, we'll fork this repo.
 ![](images/fork.png)
 
 Once your version is forked, clone your repo via SSH.
