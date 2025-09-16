@@ -10,6 +10,7 @@ rule work:
     shell:
         """
         sleep 2
+        echo "On {wildcards.n}"
         touch {output}
         """
 

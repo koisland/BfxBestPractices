@@ -30,6 +30,7 @@ At the start of it's run, it outputs the parameters and version it uses for a ru
 * Easy serializable as `YAML`
 * Can use existing tools to get the values I need.
     ```bash
+    module load yq
     yq .pggb.version 4_structured_data/data/pggb.params.yml
     ```
 

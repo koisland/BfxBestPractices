@@ -5,9 +5,36 @@
 All project data is stored in `/project/logsdon_shared/data`
 * Generally for external data
 
+```bash
+ls /project/logsdon_shared/data/
+```
+```
+50_diverse_primates  hgsvc3                    ONT_only_assembly
+CenRNA_IsoSeq        HiPoreC_platinum_genomes  platinum_genomes
+CHM1                 HPRC                      PrimateT2T
+CHM13                IndianMuntjac             project8p
+FiberSeq             natera                    reference
+Globus-Logsdon       neocen_orangutan_Mario    T21_Hakon
+HG002                NIST_GIAB_HG008           ucberkeley_data
+hg38                 ONeil_neocentromere
+```
+
 All PromethION data is stored in `/project/logsdon_shared/long_read_archive`
 * Pending update.
 * For data produced in our lab.
+
+```bash
+tree -L 1 /project/logsdon_shared/long_read_archive
+```
+```
+/project/logsdon_shared/long_read_archive
+├── clin
+├── nhp
+├── pop
+├── practice
+├── share
+└── unsorted
+```
 
 ### Projects
 Projects are stored in `/project/logsdon_shared/projects`
@@ -19,13 +46,22 @@ Personally, I like to keep things organized by analysis and avoid nesting direct
 * Once some analysis is done, I treat it as read-only and symlink the outputs.
 
 I also don't put any raw data in project directories.
-* Avoids change of deleting or accidentally modifying.
+* Avoids chance of deleting or accidentally modifying data.
 * Always, symlink to these files.
+
+    ```bash
+    # Example: Symlink my project data to a subdirectory in my project.
+    # Note: It needs to be an absolute path.
+    ln -s /project/logsdon_shared/data/my_project_data /project/logsdon-shared/projects/my_project/data
+    ```
 
 ## Cluster etiquette
 * Keep things clean if in a shared directory.
+    * For HGSVC, we've been using `${USER}_working` to separate separate analysis directories.
 * If running commands on the head node, watch your resource usage.
+    * Use `htop` or `top`
 * Be conscious of other users when running many jobs in the epistasis queue. Submitting many jobs on the LPC, can suspend other people's jobs.
+    * You can check via `bqueues -l $queue`
 
 ## Submitting LSF jobs
 

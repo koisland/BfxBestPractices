@@ -2,23 +2,84 @@
 Git and github allow easy sharing of code with others in research.
 
 ## git
+Is a command-line tool used for software versioning. It operates on folders (Called repositiories) and stores file information in the hidden `.git` folder. 
+* Repositories can be local (On my computer) or remote (On GitHub)
+  * In [`0_getting_started`](../0_getting_started/README.md), we forked and cloned an existing remote repository.
+
+### Making a repo
+Here, we'll make a local repository as an example.
+```bash
+mkdir -p example
+pushd example
+```
+
+We initialize the repo with `git init`. This will have it's own versioning history.
+```bash
+git init
+ls -lah
+```
+
+### Making changes
+Let's add a `README.md`.
+```bash
+printf "# Hello World\nThis is an example.\n" > README.md
+```
+
+We'll ask git to store these changes.
+```bash
+git add README.md
+```
+
+### Storing changes
+And make a commit to finalize our changes. It's good to have a useful message associated with the changes.
+```bash
+git commit -m "First commit."
+```
+
+### Creating a remote repository on GitHub and updating it
+We need to create a remote repository to store our local changes.
+
+From your "Repositories" tab, you can click "New".
+
+![](docs/making_repo.png)
+
+Give it a name and description.
+
+![](docs/making_repo_2.png)
+
+And for the quick setup, we're going to follow the bottom set of instructions.
+
+![](docs/push_to_remote.png)
+
+```bash
+git remote add origin git@github.com:koisland/example.git
+git branch -M main
+git push -u origin main
+```
+
+You can now check your remote branch. The changes your made should be visible.
+
+## Using git collaboratively
+Now we'll take a look at using Git collaboratively. Exit this repo before we begin.
+```
+popd
+```
 
 ### Branches
-Changes in a repo as branchers in a tree. Multiple branches can be made from the main branch.
+Changes in a repo are represented as branches in a tree. Multiple branches can be made from the main branch.
+* Other branches could be work from a collaborator, contributor, etc.
 
 <img src=docs/git_branches.png width="50%"></img>
 
 > Here the `master` branch on `My Computer` has changes diverged from `origin/master` `git.outcompany.com`. These need to resolved before merging.
 
-Make a new branch with your name.
+Make a new branch within this repository your name.
 ```bash
 git checkout -b $USER
 ```
 
-### Making changes
-Changes can be made by modifying text in a git repository.
-
-`git` can tell you what changes you have done since a previous commit.
+### Checking changes
+`git` can tell you what changes you have done in this branch since a previous commit.
 
 The status of the repo.
 ```bash
@@ -60,30 +121,26 @@ nano README.md
 # vim README.md
 ```
 
-### Storing changes
+### Updating our fork
 Now that those changes have been made, we can commit them to your branch.
 ```bash
 git add README.md
-```
-
-Then commit those changes and add a useful message. This is important as it's much easier to check a commit message than search through many lines of code.
-```bash
 git commit -m "Added my name to README."
 ```
 
-### Pushing changes
 After commiting your changes, you can push your local branch to your remote.
 ```bash
-git push -u origin main
+git push -u origin $USER
 ```
 
-## GitHub
-
 ### Pull request
-Finally, we'll open a pull-request (PR) to merge those changes into the main branch.
+Finally, we'll open a pull-request (PR) on GitHub to merge those changes into the main branch.
 
 ![](docs/pr.png)
 ![](docs/pr_changes.png)
+
+> ![NOTE]
+> If we overwrote someone else's contributions, we may have merge conflicts. These will need to be resolved in order to merge our changes.
 
 Congrats! What you've just done is the core workflow of open-source software development!
 
