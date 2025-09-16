@@ -3,6 +3,10 @@ Structured data is data that is easily machine-readable.
 
 Common formats like `JSON`, `YAML`, `TOML`, or `TSV`/`CSV` are examples of machine-readable, structured data.
 
+Similar concept to "tidy" data where data is structured to make analysis easy.
+* Wickham, Hadley (2014). "Tidy Data" (PDF). Journal of Statistical Software. 59 (10). doi:10.18637/jss.v059.i10.
+* ^^^ Author of R tidyverse
+
 ## Example: Inspector
 [`Inspector`](https://github.com/Maggi-Chen/Inspector)'s is an example of what you should __avoid__. Looking at its summary output:
 * It is not easily serializable.
@@ -28,11 +32,7 @@ N50 of contigs >1Mbp	146787023
 
 At the start of it's run, it outputs the parameters and version it uses for a run.
 * Easy serializable as `YAML`
-* Can use existing tools to get the values I need.
-    ```bash
-    module load yq
-    yq .pggb.version 4_structured_data/data/pggb.params.yml
-    ```
+* Can use existing tools to get the values.
 
 ```yaml
 general:
@@ -52,4 +52,10 @@ pggb:
 To run the script:
 ```bash
 python structured_data/scripts/parse_summary_statistics.py 
+```
+
+## Demonstration: pggb
+```bash
+module load yq
+yq .pggb.version 4_structured_data/data/pggb.params.yml
 ```
