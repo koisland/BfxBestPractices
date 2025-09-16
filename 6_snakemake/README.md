@@ -26,7 +26,7 @@ Here are a few:
 
 You should use a workflow framework like [`Snakemake`](https://snakemake.readthedocs.io/en/stable/), [`Nextflow`](https://www.nextflow.io/docs/latest/index.html), or [`cromwell`](https://github.com/broadinstitute/cromwell).
 
->![NOTE]
+> [!NOTE]
 > This is not an absolute rule. There are plenty of data operations that can be achieved with a simple `awk` command that would be difficult in a scripting language.
 
 ## Using Snakemake
