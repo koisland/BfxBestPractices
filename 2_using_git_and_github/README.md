@@ -139,7 +139,7 @@ Finally, we'll open a pull-request (PR) on GitHub to merge those changes into th
 ![](docs/pr.png)
 ![](docs/pr_changes.png)
 
-> ![NOTE]
+> [!NOTE]
 > If we overwrote someone else's contributions, we may have merge conflicts. These will need to be resolved in order to merge our changes.
 
 Congrats! What you've just done is the core workflow of open-source software development!
