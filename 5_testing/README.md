@@ -1,6 +1,6 @@
 # Testing
-Testing is important process in bioinformatics method development.
-* No different from having controls in wet-lab experiments.
+Testing is an important process in bioinformatics method development.
+* This is no different from having controls in wet-lab experiments.
 
 In Python, this is fairly easy with `pytest`.
 ```bash

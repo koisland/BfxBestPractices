@@ -8,26 +8,6 @@ USER=""
 ssh $USER@pepe.pmacs.upenn.edu
 ```
 
-## Conda
-[Install conda](https://github.com/conda-forge/miniforge?tab=readme-ov-file#unix-like-platforms-macos-linux--wsl) on the cluster.
-* If you have already installed conda, you can skip this step.
-```bash
-wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash Miniforge3-$(uname)-$(uname -m).sh
-# Then type 'Y' to the prompts.
-```
-
-Exit your terminal and log back onto pepe. It should now look something like this:
-```
-(base) [koisland@pepe ~]$ 
-```
-
-Now install the environment for the workshop.
-```bash
-conda env create -f environment.yaml --name workshop
-conda activate workshop
-```
-
 ## GitHub account and SSH key
 First, create a GitHub account.
 ![](images/github.png)
@@ -58,4 +38,25 @@ Once your version is forked, clone your repo via SSH.
 ```bash
 GH_USER=""
 git clone git@github.com:$GH_USER/BfxBestPractices.git
+```
+
+## Conda
+[Install conda](https://github.com/conda-forge/miniforge?tab=readme-ov-file#unix-like-platforms-macos-linux--wsl) on the cluster.
+* If you have already installed conda, you can skip this step.
+```bash
+wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
+# Then type 'Y' to the prompts.
+```
+
+Exit your terminal and log back onto pepe. It should now look something like this:
+```
+(base) [koisland@pepe ~]$ 
+```
+
+Now change directory to this repo and install the environment for the workshop.
+```bash
+cd BfxBestPractices
+conda env create -f environment.yaml --name workshop
+conda activate workshop
 ```
