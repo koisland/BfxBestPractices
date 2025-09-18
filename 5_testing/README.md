@@ -20,7 +20,7 @@ To run it:
 pytest -v 5_testing/scripts/test_basic.py
 ```
 
-Running an end-to-end testing the output of a program is called an integration test. This is something I often do with command-line programs.
+Unittests are tests that test a specific part of your code.
 ```
 test/data/
 ├── input.txt
@@ -33,12 +33,32 @@ def work(input_data):
     ...
     return output
 
-def test_integration():
+def test_unittest():
     # read test/data/input.txt
     input_data = ...
     # read test/data/output.txt
     expected_output_data = ...
     assert work(input_data) == expected_output_data, "Something is wrong with my program or it is non-deterministic"
+```
+
+Running an end-to-end testing the output of a program is called an integration test. This is something I often do with command-line programs.
+```python
+import subprocess
+
+def test_integration():
+    # read test/data/output.txt
+    expected_output_data = ...
+
+    output = subprocess.run(
+        [
+            "my_script", "test/data/input.txt", 
+        ]
+        check=True,
+        capture_output=True,
+    )
+    # Cleanup output and then compare. 
+    ...
+    assert output == expected_output_data, "Something is wrong with my program or it is non-deterministic"
 ```
 
 # Demonstration: Fixing a broken test
