@@ -32,11 +32,15 @@ You should use a workflow framework like [`Snakemake`](https://snakemake.readthe
 ## Using Snakemake
 I use Snakemake a ton because it provides a very simple and intuitive way to organize workflow steps.
 
-Composed of `rule`s with an `input`, `output`, and `shell` directive:
-```
+### Format
+Composed of `rule`s with an `input`, `output`, and `shell` directive. There are many more directives that you can read about [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#).
+```python
 rule something:
+    # Input files
     input: ""
+    # Output files
     output: ""
+    # Command to run on files.
     shell: ""
 ```
 
@@ -54,7 +58,42 @@ rule all:
 ![](https://www.hpc-carpentry.org/hpc-python/fig/05-final-dag.svg)
 > Source: https://www.hpc-carpentry.org/hpc-python/14-final-notes/index.html
 
-Allows parallelization by specifying the number of cores/jobs.
+### Wildcards
+Wildcards allow running a given workflow for multiple samples, conditions, etc.
+* Specified via python format string, `"{wildcard_name}"`
+* Add to input, output, log, etc. that need to be variable.
+* ex. `"input/{sm}.fa"`
+* Can be expanded via the `expand()` function
+    ```python
+    SAMPLES=["a", "b", "c"]
+    expand("input/{sm}.fa", sm=SAMPLES)
+    # ['input/a.fa', 'input/b.fa', 'input/c.fa']
+    ```
+
+Here's a small example:
+```python
+# A list of samples
+SAMPLES = ["a", "b", "c"]
+
+# We want to some analysis on multiple samples.
+rule analysis:
+    input:
+        "input/{sample}.fa"
+    output:
+        "output/{sample}.fa"
+    shell:
+        ...
+    
+rule all:
+    input:
+        expand(rules.analysis.output, sm=SAMPLES)
+    default_target:
+        True
+```
+
+### Running
+Allows parallelization by specifying the number of cores/jobs. 
+* For other command-line flags, read [here](https://snakemake.readthedocs.io/en/stable/executing/cli.html).
 ```bash
 snakemake -np -c 12 -s 6_snakemake/scripts/work.smk
 ```
@@ -66,4 +105,76 @@ time bash 6_snakemake/scripts/work.sh
 
 ```bash
 time snakemake -p -c 6 -s 6_snakemake/scripts/work.smk
+```
+
+## Dynamic outputs with checkpoints
+One strength of Snakemake is that you know exactly what output is produced from a workflow.
+
+However, sometimes you need output to be dynamic.
+* ex. I have a list of fasta sequences and I only want to run an analysis on those that pass some condition.
+
+```
+                 +-> file_1 -> check (o) -> analysis_a
+generate_files --+-> file_2 -> check (o) -> analysis_a
+                 +-> file_3 -> check (x) -> analysis_b
+```
+
+You can use checkpoints in Snakemake to dynamically change which analysis to run based on some condition. Then you can aggregate the outputs.
+* See [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#data-dependent-conditional-execution) for more information.
+
+```python
+# Specify checkpoint with checkpoint label.
+checkpoints step_that_produces_var_output:
+    input:
+        ...
+    output:
+        ...
+    shell:
+        ...
+
+rule analysis_a:
+    ...
+
+rule analysis_b:
+    ...
+
+def final_outputs(wc):
+    # We want to get the checkpoint output for all passed wildcards.
+    chkpt = checkpoints.step_that_produces_var_output.get(**wc).output
+
+    ... # Read checkpoint output
+    # Then, based on checkpoint output, do something else.
+    if cond:
+        return rules.analysis_a.output
+    else:
+        return rules.analysis_b.output
+
+# Then aggregate outputs
+rule aggregate_outputs:
+    input:
+        final_outputs
+    output:
+        touch("all.done")
+
+rule all:
+    input:
+        rule.aggregate_outputs.output
+    default_target:
+        True
+```
+
+## Example: Checkpoints
+Here we'll generate some random fasta files and change what we do to each file based on if it has an `N`s.
+```bash
+snakemake -p -c 6 -s 6_snakemake/scripts/checkpoints.smk
+```
+
+Valid added to header.
+```bash
+git diff --no-index results/checkpoints/seqs/1.fa results/checkpoints/valid/1.fa
+```
+
+Scaffolds removed.
+```bash
+git diff --no-index results/checkpoints/seqs/0.fa results/checkpoints/scaffold/0.fa
 ```

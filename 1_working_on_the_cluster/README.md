@@ -98,6 +98,9 @@ pip install snakemake-executor-plugin-lsf
 snakemake -np --executor lsf -s 2_working_on_the_cluster/scripts/cluster.smk
 ```
 
+> [!NOTE]
+> When submitting long-running jobs, you should use this with `tmux`, `screen`, or `nohup`.
+
 ```
 rule name:
     input: ""

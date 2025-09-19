@@ -1,7 +1,8 @@
 # Structured data
-Structured data is data that is easily machine-readable.
+Structured data is data that is easily machine-readable and tidy. Tidy data allows us to easily parse data and actually analyze data.
+* See https://vita.had.co.nz/papers/tidy-data.pdf
 
-Common formats like `JSON`, `YAML`, `TOML`, or `TSV`/`CSV` are examples of machine-readable, structured data.
+Common formats like `JSON`, `YAML`, `TOML`, or `TSV`/`CSV` are examples of machine-readable, tidy, structured data.
 
 Similar concept to "tidy" data where data is structured to make analysis easy.
 * Wickham, Hadley (2014). "Tidy Data" (PDF). Journal of Statistical Software. 59 (10). doi:10.18637/jss.v059.i10.

@@ -7,3 +7,4 @@ To set up your environment and other things for the workshop, see [here](0_getti
 ## Completed by:
 * Keith
 * SCC
+* Carolina
