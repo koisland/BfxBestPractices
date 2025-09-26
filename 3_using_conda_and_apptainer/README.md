@@ -41,10 +41,10 @@ Using containerization tools like `apptainer` or `docker`, can help alleviate th
 
 We'll load the apptainer module.
 ```bash
-module load apptainer
+module load DEV/singularity
 ```
 
 And use a [singularity](https://github.com/koisland/LPCDockerfiles) file I created prior to this workshop.
 ```bash
-apptainer exec /project/logsdon_shared/tools/containers/nucflag.sif nucflag -h
+singularity exec /project/logsdon_shared/tools/containers/nucflag.sif nucflag -h
 ```
