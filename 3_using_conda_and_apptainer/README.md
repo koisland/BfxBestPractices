@@ -34,17 +34,17 @@ ibash
 conda run --name workshop nucflag -h 
 ```
 
-# Apptainer
+# Apptainer/Singularity
 While conda helps in reproducibility, many packages still depend on shared/system libraries being available. Also complicating things is the fact that if we compile/install our code in one environment, but try to run it in another, things might break.
 
 Using containerization tools like `apptainer` or `docker`, can help alleviate this pain.
 
 We'll load the apptainer module.
 ```bash
-module load apptainer
+module load DEV/singularity
 ```
 
 And use a [singularity](https://github.com/koisland/LPCDockerfiles) file I created prior to this workshop.
 ```bash
-apptainer exec /project/logsdon_shared/tools/containers/nucflag.sif nucflag -h
+singularity exec /project/logsdon_shared/tools/containers/nucflag.sif nucflag -h
 ```

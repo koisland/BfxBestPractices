@@ -68,7 +68,7 @@ I also don't put any raw data in project directories.
 ### Manually
 To submit LSF jobs you can create batch scripts.
 ```bash
-bsub < 2_working_on_the_cluster/scripts/cluster.sh
+bsub < 1_working_on_the_cluster/scripts/cluster.sh
 ```
 
 I find this pretty tedious and limiting so I don't use this at all.
@@ -95,7 +95,7 @@ pip install snakemake-executor-plugin-lsf
 ```
 
 ```bash
-snakemake -np --executor lsf -s 2_working_on_the_cluster/scripts/cluster.smk
+snakemake -np --executor lsf -s 1_working_on_the_cluster/scripts/cluster.smk
 ```
 
 > [!NOTE]

@@ -91,6 +91,55 @@ rule all:
         True
 ```
 
+#### Lazy rule evaluation with wildcards
+I find a common Snakemake idiom to be the following:
+1. Read a configfile/data source.
+2. Categorize input files/config by wildcard in a dictionary.
+3. Read files within functions.
+
+However, because `Snakemake` doesn't know what the input is at workflow compile time, we need to lazily evaluate it.
+
+Consider the following example:
+```python
+FILES = {"ont": ["file_1.bam"]}
+
+rule all:
+    input:
+        # We want our wildcard to be dtype
+        expand("results/{dtype}/summary.txt", dtype="ont")
+
+rule analysis:
+    # But this immediately fails because we try to use a literal string "{dtype}" to access the value in FILES.
+    input: FILES["{dtype}"]
+    output: "results/{dtype}/summary.txt"
+    shell:
+        """
+        # Some work...
+        """
+```
+
+To make this work, we need to delay Snakemake from evaluating `rules.analysis.input` by using a [lambda](https://realpython.com/python-lambda/) function.
+```python
+FILES = {"ont": ["file_1.bam"]}
+
+rule all:
+    input:
+        # Again, we want our wildcard to be dtype
+        expand("results/{dtype}/summary.txt", dtype="ont")
+
+rule analysis:
+    # This works! Snakemake now will now wait to get the input.
+    input: lambda wc: FILES[wc.dtype]
+    output: "results/{dtype}/summary.txt"
+    shell:
+        """
+        # Some work...
+        """
+```
+
+This also applies to parameters and other directives.
+
+
 ### Running
 Allows parallelization by specifying the number of cores/jobs. 
 * For other command-line flags, read [here](https://snakemake.readthedocs.io/en/stable/executing/cli.html).

@@ -52,7 +52,7 @@ pggb:
 ## Demonstration: Inspector
 To run the script:
 ```bash
-python structured_data/scripts/parse_summary_statistics.py 
+python 4_structured_data/scripts/parse_summary_statistics.py 
 ```
 
 ## Demonstration: pggb
